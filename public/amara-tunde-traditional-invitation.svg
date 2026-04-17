@@ -1,0 +1,104 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="1600"
+  viewBox="0 0 1200 1600"
+  fill="none"
+>
+  <defs>
+    <linearGradient id="paper" x1="120" y1="80" x2="1080" y2="1520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F1" />
+      <stop offset="1" stop-color="#F3E0C0" />
+    </linearGradient>
+    <linearGradient id="sash" x1="120" y1="0" x2="320" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7F3B28" />
+      <stop offset=".5" stop-color="#B66340" />
+      <stop offset="1" stop-color="#D2A650" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1025 310) rotate(137) scale(510 510)">
+      <stop stop-color="#D2A650" stop-opacity=".3" />
+      <stop offset="1" stop-color="#D2A650" stop-opacity="0" />
+    </radialGradient>
+    <style>
+      .serif { font-family: Baskerville, Georgia, "Times New Roman", serif; }
+      .sans { font-family: "Avenir Next", "Segoe UI", sans-serif; }
+      .caps { letter-spacing: 6px; text-transform: uppercase; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="1600" rx="64" fill="url(#paper)" />
+  <rect width="1200" height="1600" rx="64" fill="url(#glow)" />
+
+  <rect x="74" y="74" width="1052" height="1452" rx="42" fill="none" stroke="#D2A650" stroke-opacity=".58" stroke-width="3" />
+  <rect x="104" y="104" width="992" height="1392" rx="30" fill="none" stroke="#7F3B28" stroke-opacity=".16" stroke-width="2" />
+
+  <rect x="104" y="104" width="992" height="52" rx="18" fill="#FFF2DE" />
+  <rect x="104" y="104" width="992" height="52" rx="18" fill="url(#sash)" opacity=".95" />
+  <path d="M104 154H1096" stroke="#FFF4E8" stroke-opacity=".45" stroke-width="2" stroke-dasharray="18 12" />
+
+  <rect x="122" y="220" width="166" height="1024" rx="30" fill="url(#sash)" />
+  <rect x="150" y="250" width="110" height="964" rx="18" fill="none" stroke="#FFF2DE" stroke-opacity=".45" stroke-width="2" stroke-dasharray="14 10" />
+
+  <circle cx="600" cy="292" r="56" fill="#FFF5E7" stroke="#7F3B28" stroke-opacity=".18" stroke-width="2" />
+  <circle cx="578" cy="292" r="24" fill="#7F3B28" />
+  <circle cx="622" cy="292" r="24" fill="#D2A650" />
+  <text x="578" y="301" text-anchor="middle" class="serif" font-size="22" fill="#FFF5E7">A</text>
+  <text x="622" y="301" text-anchor="middle" class="serif" font-size="22" fill="#7F3B28">T</text>
+
+  <text x="600" y="402" text-anchor="middle" class="sans caps" font-size="26" font-weight="600" fill="#B66340">
+    Traditional Wedding
+  </text>
+  <text x="600" y="502" text-anchor="middle" class="serif" font-size="52" fill="#7F3B28">
+    Two families, one joyful room
+  </text>
+
+  <text x="356" y="650" class="sans caps" font-size="20" font-weight="600" fill="#B66340">
+    Bride
+  </text>
+  <text x="356" y="775" class="serif" font-size="110" font-weight="700" fill="#7F3B28">
+    Amara
+  </text>
+  <text x="356" y="844" class="serif" font-size="42" fill="#B66340">
+    Okafor
+  </text>
+
+  <text x="846" y="738" text-anchor="end" class="serif" font-size="88" fill="#D2A650">
+    &
+  </text>
+
+  <text x="846" y="900" text-anchor="end" class="sans caps" font-size="20" font-weight="600" fill="#B66340">
+    Groom
+  </text>
+  <text x="846" y="1012" text-anchor="end" class="serif" font-size="110" font-weight="700" fill="#7F3B28">
+    Tunde
+  </text>
+  <text x="846" y="1082" text-anchor="end" class="serif" font-size="42" fill="#B66340">
+    Adeyemi
+  </text>
+
+  <path d="M356 1166H846" stroke="#D2A650" stroke-opacity=".58" stroke-width="2" />
+
+  <g transform="translate(300 1225)">
+    <rect width="600" height="220" rx="34" fill="#FFF6E9" stroke="#7F3B28" stroke-opacity=".14" />
+    <text x="300" y="56" text-anchor="middle" class="sans caps" font-size="20" font-weight="600" fill="#B66340">
+      Saturday, August 9th, 2026
+    </text>
+    <text x="300" y="112" text-anchor="middle" class="serif" font-size="42" fill="#7F3B28">
+      12:00 PM to 6:00 PM
+    </text>
+    <text x="300" y="162" text-anchor="middle" class="sans" font-size="30" fill="#38211A">
+      Balmoral Hall, Lagos
+    </text>
+    <text x="300" y="198" text-anchor="middle" class="sans" font-size="24" fill="#7F3B28">
+      Ankara and traditional attire encouraged
+    </text>
+  </g>
+
+  <text x="205" y="1360" text-anchor="middle" class="sans caps" font-size="20" font-weight="600" fill="#FFF4E8" transform="rotate(-90 205 1360)">
+    Igbo x Yoruba x Lagos x Love
+  </text>
+
+  <text x="600" y="1510" text-anchor="middle" class="sans" font-size="28" fill="#7F3B28">
+    A celebration of blessing, colour, family, and forever
+  </text>
+</svg>
