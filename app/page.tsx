@@ -152,19 +152,19 @@ const coupleSnapshots = [
   {
     title: "Before the guests arrive",
     note: "The calm, composed portraits before the room turns into music, greetings, and joyful noise.",
-    src: "/couple-portrait-one.svg",
+    src: "/couple-portrait-one.jpg",
     alt: "Illustrated portrait keepsake inspired by Amara and Tunde before the celebration",
   },
   {
     title: "Between laughter and prayer",
     note: "The kind of frame that catches the softness between formal rites and family celebration.",
-    src: "/couple-portrait-two.svg",
+    src: "/couple-portrait-two.jpg",
     alt: "Illustrated portrait keepsake inspired by the couple sharing a quiet moment together",
   },
   {
     title: "Golden-hour keepsake",
     note: "A closing frame for the glow, fabrics, and gratitude that stay long after the ceremony ends.",
-    src: "/couple-portrait-three.svg",
+    src: "/couple-portrait-three.jpg",
     alt: "Illustrated keepsake frame inspired by Amara and Tunde in warm evening light",
   },
 ] as const;
@@ -336,6 +336,7 @@ function CoupleSnapshot({
           width={720}
           height={860}
           className="h-auto w-full"
+          priority
         />
       </div>
       <figcaption className="mt-4">
@@ -660,11 +661,12 @@ export default function Home() {
                   <div className="couple-video-fallback">
                     <div className="couple-video-image">
                       <Image
-                        src="/couple-portrait-three.svg"
+                        src="/woman-man-wearing-jewelry.jpg"
                         alt="Illustrated keepsake frame for Amara and Tunde"
                         width={1200}
                         height={900}
                         className="h-auto w-full"
+                        priority
                       />
                     </div>
                     <div className="couple-video-copy">
@@ -879,10 +881,10 @@ export default function Home() {
               <div className="invitation-frame">
                 <Image
                   src="/iv.jpg"
+                  priority
                   alt="Digital invitation card for Amara Okafor and Tunde Adeyemi's traditional wedding"
                   width={1200}
                   height={1600}
-                  priority
                   className="h-auto w-full"
                 />
               </div>
