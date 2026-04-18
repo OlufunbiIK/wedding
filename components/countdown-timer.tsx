@@ -37,9 +37,9 @@ function getCountdownSnapshot(): CountdownSnapshot {
     isComplete: false,
     units: [
       { label: "Days", value: String(days).padStart(2, "0") },
-      { label: "Hours", value: String(hours).padStart(2, "0") },
-      { label: "Minutes", value: String(minutes).padStart(2, "0") },
-      { label: "Seconds", value: String(seconds).padStart(2, "0") },
+      { label: "Hrs", value: String(hours).padStart(2, "0") },
+      { label: "Mins", value: String(minutes).padStart(2, "0") },
+      { label: "Secs", value: String(seconds).padStart(2, "0") },
     ],
   };
 }
@@ -73,7 +73,7 @@ export function CountdownTimer() {
         {countdown.units.map((unit) => (
           <div
             key={unit.label}
-            className="rounded-[1.4rem] border border-gold/20 bg-white/70 p-4 text-center"
+            className="rounded-full border border-gold/20 bg-white/70 p-4 text-center mx-auto"
           >
             <p className="font-heading text-4xl text-terracotta-deep">
               {unit.value}

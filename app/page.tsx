@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CountdownTimer } from "@/components/countdown-timer";
 import { Reveal } from "@/components/reveal";
-import { RsvpButtons } from "@/components/rsvp-buttons";
+import { RsvpStation } from "@/components/rsvp-station";
 
 const pageLinks = [
   { href: "#story", label: "Story" },
@@ -88,24 +88,6 @@ const storyFragments = [
     title: "What grew",
     description:
       "Not a loud love, but a steady one. Gentle, prayerful, joyful, and ready to be witnessed by everyone who shaped them.",
-  },
-] as const;
-
-const giftIdeas = [
-  {
-    title: "Their first home",
-    description:
-      "For the curtains, bowls, candles, and beautiful little details that make a space feel lived in and loved.",
-  },
-  {
-    title: "Rest after the drums",
-    description:
-      "A thoughtful contribution toward honeymoon quiet after a day full of music, colour, and family joy.",
-  },
-  {
-    title: "Future hosting table",
-    description:
-      "For the future jollof nights, visiting cousins, Sunday rice, and generous meals they hope to share for years.",
   },
 ] as const;
 
@@ -224,6 +206,22 @@ function KeepsakeFrame({
 export default function Home() {
   const leftLinks = pageLinks.slice(0, 3);
   const rightLinks = pageLinks.slice(3);
+  const giftLinks = [
+    {
+      title: "Amazon Registry",
+      description:
+        "For home pieces, tableware, and thoughtful things that can arrive directly through an online registry.",
+      href: process.env.AMAZON_GIFT_URL ?? "",
+      cta: "Open Amazon registry",
+    },
+    {
+      title: "Cash Blessing",
+      description:
+        "For honeymoon rest, first-home details, or a generous blessing toward their new beginning together.",
+      href: process.env.CASH_GIFT_URL ?? "",
+      cta: "Send cash gift",
+    },
+  ] as const;
 
   return (
     <main className="relative overflow-x-hidden">
@@ -540,16 +538,16 @@ export default function Home() {
               <div>
                 <p className="section-eyebrow text-cream-soft/72">RSVP</p>
                 <h2 className="mt-4 font-heading text-4xl leading-[0.98] text-cream-soft sm:text-5xl">
-                  However you answer, we receive it with warmth.
+                  A short RSVP for guests, and a hidden planner view for organizers.
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-cream-soft/82 sm:text-lg">
-                  We would be delighted to celebrate with you in person. If life
-                  moves differently, your love still reaches us, and we will feel
-                  it.
+                  Guests only see a simple form. Organizers can unlock the
+                  planning list right here on the same page with a password, so
+                  names, contacts, and guest counts stay private.
                 </p>
               </div>
               <div className="mt-8">
-                <RsvpButtons />
+                <RsvpStation />
               </div>
             </div>
           </Reveal>
@@ -562,12 +560,17 @@ export default function Home() {
             <SectionHeading
               eyebrow="Gift and Registry"
               title="Presence first. Blessing always."
-              description="Truly, celebrating with you is enough. If you would still like to give, these are thoughtful ways to do it."
+              description="Celebrating with loved ones is already enough. If someone still wants to bless the couple, these options make that easy without turning the page into a store."
             />
+            <div className="mt-6 rounded-[1.7rem] border border-terracotta/12 bg-white/70 p-5 text-sm leading-7 text-ink/72 shadow-[0_18px_40px_rgba(76,36,25,0.08)]">
+              Their deepest wish is simply to have you there. The gift links are
+              optional, warm, and practical for anyone who would still like to
+              give from near or far.
+            </div>
           </Reveal>
 
           <div className="grid gap-4">
-            {giftIdeas.map((gift, index) => (
+            {giftLinks.map((gift, index) => (
               <Reveal key={gift.title} delay={index * 70}>
                 <div className="gift-ribbon">
                   <p className="section-eyebrow text-[10px]">Optional gift</p>
@@ -575,13 +578,39 @@ export default function Home() {
                     <h3 className="font-heading text-3xl text-terracotta-deep">
                       {gift.title}
                     </h3>
-                    <p className="text-sm leading-7 text-ink/72">
-                      {gift.description}
-                    </p>
+                    <div className="space-y-4">
+                      <p className="text-sm leading-7 text-ink/72">
+                        {gift.description}
+                      </p>
+                      {gift.href ? (
+                        <a
+                          href={gift.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="hero-cta hero-cta-primary"
+                        >
+                          {gift.cta}
+                        </a>
+                      ) : (
+                        <span className="inline-flex rounded-full border border-terracotta/14 bg-white/70 px-4 py-3 text-xs font-semibold uppercase tracking-[0.22em] text-terracotta/80">
+                          Link coming soon
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </Reveal>
             ))}
+            <Reveal delay={160}>
+              <div className="gift-ribbon">
+                <p className="section-eyebrow text-[10px]">A gentle note</p>
+                <p className="mt-3 text-sm leading-7 text-ink/72">
+                  If you plan to give through Amazon or a cash link, the actual
+                  URLs can be added later without changing the design of this
+                  section.
+                </p>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
