@@ -490,6 +490,151 @@ button {
   backdrop-filter: blur(10px);
 }
 
+.couple-video-shell,
+.couple-photo-card,
+.asoebi-card,
+.asoebi-note {
+  border: 1px solid rgba(127, 59, 40, 0.12);
+  box-shadow: var(--app-shadow);
+}
+
+.couple-video-shell {
+  overflow: hidden;
+  border-radius: 2.3rem;
+  background:
+    linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(248, 232, 208, 0.9)),
+    radial-gradient(circle at top right, rgba(210, 166, 80, 0.14), transparent 30%);
+  padding: 1rem;
+}
+
+.couple-video-frame {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 1.7rem;
+  border: 1px solid rgba(127, 59, 40, 0.12);
+  background: rgba(56, 33, 26, 0.08);
+}
+
+.couple-video-fallback {
+  display: grid;
+  gap: 1rem;
+}
+
+.couple-video-image {
+  overflow: hidden;
+  border-radius: 1.7rem;
+  border: 1px solid rgba(127, 59, 40, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 227, 203, 0.72));
+}
+
+.couple-video-copy {
+  border-radius: 1.5rem;
+  border: 1px solid rgba(127, 59, 40, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+  padding: 1.2rem;
+}
+
+.couple-photo-card {
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(247, 231, 205, 0.88));
+  padding: 1rem;
+}
+
+.couple-photo-image {
+  overflow: hidden;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(127, 59, 40, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 227, 203, 0.72));
+}
+
+.asoebi-note,
+.asoebi-card {
+  border-radius: 2rem;
+  background:
+    linear-gradient(180deg, rgba(255, 251, 245, 0.98), rgba(248, 232, 208, 0.9));
+  padding: 1.35rem 1.4rem;
+}
+
+.asoebi-note {
+  margin-top: 1.5rem;
+}
+
+.asoebi-preview {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.asoebi-swatch-main,
+.asoebi-swatch-chip {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.56);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 18px 34px rgba(76, 36, 25, 0.1);
+}
+
+.asoebi-swatch-main {
+  display: flex;
+  min-height: 10rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 1.5rem;
+  padding: 1rem;
+}
+
+.asoebi-swatch-main::after,
+.asoebi-swatch-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.14), transparent 45%);
+  pointer-events: none;
+}
+
+.asoebi-swatch-meta,
+.asoebi-swatch-hex,
+.asoebi-swatch-chip span {
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 250, 243, 0.96);
+  text-shadow: 0 2px 10px rgba(56, 33, 26, 0.24);
+}
+
+.asoebi-swatch-meta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.asoebi-swatch-hex {
+  margin-top: 0.55rem;
+  font-family: var(--font-heading-stack);
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+}
+
+.asoebi-swatch-chip {
+  display: flex;
+  min-height: 4.75rem;
+  align-items: flex-end;
+  border-radius: 1.1rem;
+  padding: 0.8rem;
+}
+
+.asoebi-swatch-chip span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
 .detail-panel {
   border-radius: 1.7rem;
   background:
@@ -712,6 +857,11 @@ button {
   .hero-stage {
     min-height: calc(100svh - 73px);
     display: flex;
+    align-items: center;
+  }
+
+  .couple-video-fallback {
+    grid-template-columns: 1.05fr 0.95fr;
     align-items: center;
   }
 

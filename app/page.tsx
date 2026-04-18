@@ -5,7 +5,9 @@ import { RsvpStation } from "@/components/rsvp-station";
 
 const pageLinks = [
   { href: "#story", label: "Story" },
+  { href: "#couple", label: "Couple" },
   { href: "#details", label: "Details" },
+  { href: "#asoebi", label: "Asoebi" },
   { href: "#schedule", label: "Procession" },
   { href: "#invitation", label: "Invitation" },
   { href: "#gifts", label: "Gifts" },
@@ -119,6 +121,137 @@ const galleryMoments = [
   },
 ] as const;
 
+const asoebiPalette = [
+  {
+    name: "Terracotta Clay",
+    hex: "#B66340",
+    accent: "#D7875D",
+    note: "The lead asoebi tone for the day: warm, rich, and easy to dress up with lace, sequins, or embroidery.",
+  },
+  {
+    name: "Champagne Sand",
+    hex: "#E8C9A8",
+    accent: "#FFF3E3",
+    note: "A soft balancing tone for shawls, wrappers, pocket squares, and gentler fabric pairings.",
+  },
+  {
+    name: "Old Gold",
+    hex: "#D2A650",
+    accent: "#F2D38A",
+    note: "Best kept for accessories, gele details, beadwork, metallic trims, and evening shimmer.",
+  },
+  {
+    name: "Olive Smoke",
+    hex: "#88724A",
+    accent: "#B39B70",
+    note: "A restrained support colour for men's accents, embroidery, and grounded contrast pieces.",
+  },
+] as const;
+
+const coupleSnapshots = [
+  {
+    title: "Before the guests arrive",
+    note: "The calm, composed portraits before the room turns into music, greetings, and joyful noise.",
+    src: "/couple-portrait-one.svg",
+    alt: "Illustrated portrait keepsake inspired by Amara and Tunde before the celebration",
+  },
+  {
+    title: "Between laughter and prayer",
+    note: "The kind of frame that catches the softness between formal rites and family celebration.",
+    src: "/couple-portrait-two.svg",
+    alt: "Illustrated portrait keepsake inspired by the couple sharing a quiet moment together",
+  },
+  {
+    title: "Golden-hour keepsake",
+    note: "A closing frame for the glow, fabrics, and gratitude that stay long after the ceremony ends.",
+    src: "/couple-portrait-three.svg",
+    alt: "Illustrated keepsake frame inspired by Amara and Tunde in warm evening light",
+  },
+] as const;
+
+function getCoupleMediaSource(rawUrl: string) {
+  const value = rawUrl.trim();
+
+  if (!value) {
+    return null;
+  }
+
+  if (/\.(mp4|webm|ogg)(\?.*)?$/i.test(value)) {
+    return {
+      kind: "video" as const,
+      src: value,
+    };
+  }
+
+  try {
+    const url = new URL(value);
+    const host = url.hostname.replace(/^www\./, "");
+
+    if (host === "youtu.be") {
+      const videoId = url.pathname.replace(/^\/+/, "");
+
+      if (videoId) {
+        return {
+          kind: "iframe" as const,
+          src: `https://www.youtube.com/embed/${videoId}`,
+        };
+      }
+    }
+
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      if (url.pathname === "/watch") {
+        const videoId = url.searchParams.get("v");
+
+        if (videoId) {
+          return {
+            kind: "iframe" as const,
+            src: `https://www.youtube.com/embed/${videoId}`,
+          };
+        }
+      }
+
+      if (url.pathname.startsWith("/shorts/")) {
+        const videoId = url.pathname.split("/")[2];
+
+        if (videoId) {
+          return {
+            kind: "iframe" as const,
+            src: `https://www.youtube.com/embed/${videoId}`,
+          };
+        }
+      }
+
+      if (url.pathname.startsWith("/embed/")) {
+        return {
+          kind: "iframe" as const,
+          src: value,
+        };
+      }
+    }
+
+    if (host === "vimeo.com") {
+      const videoId = url.pathname.split("/").filter(Boolean)[0];
+
+      if (videoId) {
+        return {
+          kind: "iframe" as const,
+          src: `https://player.vimeo.com/video/${videoId}`,
+        };
+      }
+    }
+  } catch {
+    return {
+      kind: "iframe" as const,
+      src: value,
+    };
+  }
+
+  return {
+    kind: "iframe" as const,
+    src: value,
+  };
+}
+
 function SectionHeading({
   eyebrow,
   title,
@@ -141,7 +274,9 @@ function SectionHeading({
       <h2 className="font-heading text-4xl leading-[0.96] text-terracotta-deep sm:text-5xl lg:text-6xl">
         {title}
       </h2>
-      <p className="text-base leading-8 text-ink/74 sm:text-lg">{description}</p>
+      <p className="text-base leading-8 text-ink/74 sm:text-lg">
+        {description}
+      </p>
     </div>
   );
 }
@@ -181,6 +316,96 @@ function StoryCard({
   );
 }
 
+function CoupleSnapshot({
+  title,
+  note,
+  src,
+  alt,
+}: {
+  title: string;
+  note: string;
+  src: string;
+  alt: string;
+}) {
+  return (
+    <figure className="couple-photo-card">
+      <div className="couple-photo-image">
+        <Image
+          src={src}
+          alt={alt}
+          width={720}
+          height={860}
+          className="h-auto w-full"
+        />
+      </div>
+      <figcaption className="mt-4">
+        <p className="section-eyebrow text-[10px]">Couple portrait</p>
+        <h3 className="mt-3 font-heading text-3xl text-terracotta-deep">
+          {title}
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-ink/70">{note}</p>
+      </figcaption>
+    </figure>
+  );
+}
+
+function AsoebiSwatch({
+  name,
+  hex,
+  accent,
+  note,
+}: {
+  name: string;
+  hex: string;
+  accent: string;
+  note: string;
+}) {
+  return (
+    <div className="asoebi-card">
+      <div className="asoebi-preview">
+        <div
+          className="asoebi-swatch-main"
+          style={{
+            backgroundColor: hex,
+          }}
+          aria-label={`${name} colour sample`}
+        >
+          <p className="asoebi-swatch-meta">Main sample</p>
+          <p className="asoebi-swatch-hex">{hex}</p>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div
+            className="asoebi-swatch-chip"
+            style={{
+              backgroundColor: hex,
+            }}
+            aria-hidden="true"
+          >
+            <span>Main tone</span>
+          </div>
+          <div
+            className="asoebi-swatch-chip"
+            style={{
+              backgroundColor: accent,
+            }}
+            aria-hidden="true"
+          >
+            <span>Accent pair</span>
+          </div>
+        </div>
+      </div>
+      <div className="mt-5 space-y-3">
+        <p className="section-eyebrow text-[10px]">Colour code</p>
+        <h3 className="font-heading text-3xl text-terracotta-deep">{name}</h3>
+        <p className="inline-flex rounded-full border border-terracotta/12 bg-white/72 px-3 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-terracotta">
+          {hex}
+        </p>
+        <p className="text-sm leading-7 text-ink/72">{note}</p>
+      </div>
+    </div>
+  );
+}
+
 function KeepsakeFrame({
   title,
   note,
@@ -204,8 +429,11 @@ function KeepsakeFrame({
 }
 
 export default function Home() {
-  const leftLinks = pageLinks.slice(0, 3);
-  const rightLinks = pageLinks.slice(3);
+  const leftLinks = pageLinks.slice(0, 4);
+  const rightLinks = pageLinks.slice(4);
+  const coupleMediaSource = getCoupleMediaSource(
+    process.env.COUPLE_VIDEO_URL ?? "",
+  );
   const giftLinks = [
     {
       title: "Amazon Registry",
@@ -309,7 +537,9 @@ export default function Home() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <span className="festival-chip">Balmoral Hall, Lagos</span>
                 <span className="festival-chip">12:00 PM to 6:00 PM</span>
-                <span className="festival-chip">Ankara and traditional attire</span>
+                <span className="festival-chip">
+                  Ankara and traditional attire
+                </span>
               </div>
 
               <div className="mt-10 flex flex-wrap gap-4">
@@ -378,6 +608,95 @@ export default function Home() {
                 />
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="couple" className="section-padding">
+        <div className="section-shell grid gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:items-start">
+          <Reveal>
+            <div className="story-stage">
+              <SectionHeading
+                eyebrow="The Couple"
+                title="A few frames for the two people everyone is gathering around."
+                description="This little keepsake section gives the page somewhere softer to linger: portraits now, and a short highlight film whenever one is ready."
+              />
+              <div className="mt-8 rounded-[1.7rem] border border-terracotta/12 bg-white/74 p-5 text-sm leading-7 text-ink/72 shadow-[0_18px_40px_rgba(76,36,25,0.08)]">
+                The tone here stays intimate on purpose. Not a full gallery yet,
+                just enough of Amara and Tunde together to make the invitation
+                feel more personal before the wedding-day photos arrive.
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="space-y-5">
+            <Reveal delay={80}>
+              <div className="couple-video-shell">
+                {coupleMediaSource ? (
+                  <div className="couple-video-frame">
+                    {coupleMediaSource.kind === "video" ? (
+                      <video
+                        controls
+                        preload="none"
+                        playsInline
+                        aria-label="Highlight video of Amara and Tunde"
+                        className="h-full w-full object-cover"
+                      >
+                        <source src={coupleMediaSource.src} />
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <iframe
+                        src={coupleMediaSource.src}
+                        title="Highlight video of Amara and Tunde"
+                        loading="lazy"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="h-full w-full"
+                      />
+                    )}
+                  </div>
+                ) : (
+                  <div className="couple-video-fallback">
+                    <div className="couple-video-image">
+                      <Image
+                        src="/couple-portrait-three.svg"
+                        alt="Illustrated keepsake frame for Amara and Tunde"
+                        width={1200}
+                        height={900}
+                        className="h-auto w-full"
+                      />
+                    </div>
+                    <div className="couple-video-copy">
+                      <p className="section-eyebrow text-[10px]">
+                        Highlight reel
+                      </p>
+                      <h3 className="mt-3 font-heading text-3xl text-terracotta-deep">
+                        Video space, already dressed for it
+                      </h3>
+                      <p className="mt-3 text-sm leading-7 text-ink/72">
+                        When the planner has a short film, teaser, or
+                        pre-wedding clip ready, this panel can hold it without
+                        changing the rest of the page.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Reveal>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {coupleSnapshots.map((snapshot, index) => (
+                <Reveal key={snapshot.title} delay={120 + index * 60}>
+                  <CoupleSnapshot
+                    title={snapshot.title}
+                    note={snapshot.note}
+                    src={snapshot.src}
+                    alt={snapshot.alt}
+                  />
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -452,6 +771,45 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="asoebi" className="section-padding">
+        <div className="section-shell grid gap-10 lg:grid-cols-[0.76fr_1.24fr] lg:items-start">
+          <Reveal>
+            <div className="details-column">
+              <SectionHeading
+                eyebrow="Asoebi Colour Code"
+                title="The day's family palette is warm, earthy, and celebratory."
+                description="If you are sewing asoebi, planning your gele, or coordinating accessories, these are the tones the celebration is leaning into."
+              />
+              <div className="asoebi-note">
+                <p className="section-eyebrow text-[10px]">Styling direction</p>
+                <h3 className="mt-3 font-heading text-3xl text-terracotta-deep">
+                  Terracotta leads. Gold lifts it. Sand softens it.
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-ink/72">
+                  Guests are still welcome in any elegant traditional attire,
+                  but those sewing with the family palette will look most
+                  aligned in terracotta fabrics with champagne, gold, or muted
+                  olive accents.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {asoebiPalette.map((swatch, index) => (
+              <Reveal key={swatch.name} delay={index * 55}>
+                <AsoebiSwatch
+                  name={swatch.name}
+                  hex={swatch.hex}
+                  accent={swatch.accent}
+                  note={swatch.note}
+                />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="schedule" className="section-padding">
         <div className="section-shell">
           <Reveal>
@@ -474,7 +832,9 @@ export default function Home() {
                 >
                   <div className="procession-time">{item.time}</div>
                   <div className="procession-card">
-                    <p className="section-eyebrow text-[10px]">{item.subtitle}</p>
+                    <p className="section-eyebrow text-[10px]">
+                      {item.subtitle}
+                    </p>
                     <h3 className="mt-3 font-heading text-3xl text-terracotta-deep">
                       {item.title}
                     </h3>
@@ -518,7 +878,7 @@ export default function Home() {
               <div className="invitation-plinth" aria-hidden="true" />
               <div className="invitation-frame">
                 <Image
-                  src="/amara-tunde-traditional-invitation.svg"
+                  src="/iv.jpg"
                   alt="Digital invitation card for Amara Okafor and Tunde Adeyemi's traditional wedding"
                   width={1200}
                   height={1600}
@@ -538,10 +898,11 @@ export default function Home() {
               <div>
                 <p className="section-eyebrow text-cream-soft/72">RSVP</p>
                 <h2 className="mt-4 font-heading text-4xl leading-[0.98] text-cream-soft sm:text-5xl">
-                  A short RSVP for guests, and a hidden planner view for organizers.
+                  A short RSVP for guests, and a hidden planner view for the
+                  event team.
                 </h2>
                 <p className="mt-5 max-w-2xl text-base leading-8 text-cream-soft/82 sm:text-lg">
-                  Guests only see a simple form. Organizers can unlock the
+                  Guests only see a simple form. Event planners can unlock the
                   planning list right here on the same page with a password, so
                   names, contacts, and guest counts stay private.
                 </p>
@@ -647,8 +1008,8 @@ export default function Home() {
             Amara Okafor &amp; Tunde Adeyemi
           </p>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-ink/72">
-            &quot;Love is sweetest when it gathers blessing, family, and joy into
-            one room.&quot;
+            &quot;Love is sweetest when it gathers blessing, family, and joy
+            into one room.&quot;
           </p>
           <a
             href="mailto:hello@amaraandtunde.com"
@@ -656,7 +1017,15 @@ export default function Home() {
           >
             hello@amaraandtunde.com
           </a>
-          <p className="mt-4 text-sm text-ink/62">Designed by Olufunbi Ibrahim</p>
+          <p className="mt-4 text-sm text-ink/62">
+            Designed by Olufunbi Ibrahim
+          </p>
+          <a
+            href="mailto:olufubiibrahim@gmail.com"
+            className="mt-4 text-sm text-ink/62"
+          >
+            olufunbiibrahim@gmail.com
+          </a>
         </div>
       </footer>
     </main>

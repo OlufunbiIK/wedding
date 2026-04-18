@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 960" fill="none">
+  <defs>
+    <linearGradient id="bg1" x1="120" y1="64" x2="680" y2="896" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8EE"/>
+      <stop offset="1" stop-color="#F0D9B7"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0" cy="0" r="1" gradientTransform="translate(614 210) rotate(90) scale(212 244)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8C76F" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#E8C76F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="960" rx="56" fill="url(#bg1)"/>
+  <rect x="36" y="36" width="728" height="888" rx="42" stroke="#9E5A39" stroke-opacity=".18" stroke-width="2" stroke-dasharray="7 11"/>
+  <circle cx="620" cy="210" r="214" fill="url(#glow1)"/>
+  <path d="M176 690C176 570.706 272.706 474 392 474H410C529.294 474 626 570.706 626 690V756H176V690Z" fill="#9F5B3A"/>
+  <ellipse cx="402" cy="374" rx="126" ry="146" fill="#7F3B28"/>
+  <path d="M242 316C278 208 360 150 454 150C548 150 616 212 628 308C600 250 534 214 450 214C364 214 286 252 242 316Z" fill="#D2A650"/>
+  <path d="M228 356C264 280 338 228 430 228C510 228 586 268 638 348C594 330 540 320 478 320C386 320 302 336 228 356Z" fill="#B66340"/>
+  <ellipse cx="402" cy="364" rx="92" ry="112" fill="#E9C7A4"/>
+  <path d="M304 780H502" stroke="#FFF8EE" stroke-opacity=".72" stroke-width="2"/>
+  <text x="92" y="828" fill="#7F3B28" font-family="Baskerville, serif" font-size="62" letter-spacing="-0.03em">Amara</text>
+  <text x="94" y="876" fill="#7F3B28" fill-opacity=".72" font-family="Avenir Next, Gill Sans, sans-serif" font-size="20" letter-spacing=".32em">MORNING PORTRAIT</text>
+</svg>

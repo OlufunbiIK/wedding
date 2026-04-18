@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="126" y1="82" x2="1038" y2="824" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9F0"/>
+      <stop offset="1" stop-color="#EDD1A5"/>
+    </linearGradient>
+    <radialGradient id="glow3" cx="0" cy="0" r="1" gradientTransform="translate(906 212) rotate(90) scale(238 286)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E6B75E" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#E6B75E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" rx="52" fill="url(#bg3)"/>
+  <rect x="34" y="34" width="1132" height="832" rx="36" stroke="#9E5A39" stroke-opacity=".18" stroke-width="2" stroke-dasharray="7 11"/>
+  <circle cx="908" cy="210" r="240" fill="url(#glow3)"/>
+  <rect x="100" y="110" width="1000" height="560" rx="34" fill="#FFF6EA" fill-opacity=".72"/>
+  <ellipse cx="472" cy="346" rx="126" ry="152" fill="#7F3B28"/>
+  <ellipse cx="718" cy="332" rx="144" ry="172" fill="#9F5B3A"/>
+  <path d="M270 626C270 486.825 382.825 374 522 374H672C811.175 374 924 486.825 924 626V704H270V626Z" fill="#C17A55"/>
+  <path d="M346 246C406 162 494 124 592 124C690 124 774 160 842 234C760 218 680 210 602 210C522 210 438 222 346 246Z" fill="#D2A650"/>
+  <path d="M432 710H872" stroke="#FFF8EE" stroke-opacity=".74" stroke-width="2"/>
+  <text x="104" y="760" fill="#7F3B28" font-family="Avenir Next, Gill Sans, sans-serif" font-size="20" letter-spacing=".32em">GOLDEN-HOUR KEEPSAKE</text>
+  <text x="102" y="828" fill="#7F3B28" font-family="Baskerville, serif" font-size="84" letter-spacing="-0.03em">Amara &amp; Tunde</text>
+</svg>

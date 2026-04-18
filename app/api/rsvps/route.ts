@@ -44,21 +44,25 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const organizerPassword = process.env.RSVP_ADMIN_PASSWORD;
+  const organizerPassword =
+    process.env.EVENT_PLANNER_PASSWORD ?? process.env.RSVP_ADMIN_PASSWORD;
+  const providedPassword =
+    request.headers.get("x-event-planner-password") ??
+    request.headers.get("x-rsvp-password");
 
   if (!organizerPassword) {
     return createJsonResponse(
       {
         error:
-          "Organizer access is not configured yet. Add RSVP_ADMIN_PASSWORD to your environment.",
+          "Planner access is not configured yet. Add EVENT_PLANNER_PASSWORD or RSVP_ADMIN_PASSWORD to your environment.",
       },
       503,
     );
   }
 
-  if (request.headers.get("x-rsvp-password") !== organizerPassword) {
+  if (providedPassword !== organizerPassword) {
     return createJsonResponse(
-      { error: "That password did not unlock the organizer list." },
+      { error: "That password did not unlock the planner list." },
       401,
     );
   }
@@ -68,7 +72,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Unable to read RSVPs", error);
     return createJsonResponse(
-      { error: "We could not load the organizer list just now." },
+      { error: "We could not load the planner list just now." },
       500,
     );
   }

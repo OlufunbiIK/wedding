@@ -113,13 +113,14 @@ export function RsvpStation() {
     message:
       "A few small details help the planners prepare your seat, your welcome, and any guests coming with you.",
   });
-  const [adminPassword, setAdminPassword] = useState("");
+  const [plannerPassword, setPlannerPassword] = useState("");
   const [organizerState, setOrganizerState] = useState<{
     status: "locked" | "loading" | "unlocked" | "error";
     message: string;
   }>({
     status: "locked",
-    message: "Organizer access is hidden until the correct password is entered.",
+    message:
+      "Event planner access is hidden until the correct password is entered.",
   });
   const [organizerData, setOrganizerData] = useState<RsvpListResponse | null>(
     null,
@@ -179,8 +180,8 @@ export function RsvpStation() {
       });
       setForm(defaultForm);
 
-      if (organizerData && adminPassword) {
-        void unlockOrganizerView(adminPassword);
+      if (organizerData && plannerPassword) {
+        void unlockOrganizerView(plannerPassword);
       }
     } catch (error) {
       setSubmitState({
@@ -194,24 +195,25 @@ export function RsvpStation() {
   }
 
   async function unlockOrganizerView(passwordOverride?: string) {
-    const passwordToUse = passwordOverride ?? adminPassword;
+    const passwordToUse = passwordOverride ?? plannerPassword;
 
     if (!passwordToUse.trim()) {
       setOrganizerState({
         status: "error",
-        message: "Enter the organizer password to unlock the planner list.",
+        message: "Enter the event planner password to unlock the planner list.",
       });
       return;
     }
 
     setOrganizerState({
       status: "loading",
-      message: "Unlocking the organizer list...",
+      message: "Unlocking the planner list...",
     });
 
     try {
       const response = await fetch("/api/rsvps", {
         headers: {
+          "x-event-planner-password": passwordToUse,
           "x-rsvp-password": passwordToUse,
         },
         cache: "no-store",
@@ -224,8 +226,8 @@ export function RsvpStation() {
       if (!response.ok || "error" in payload) {
         throw new Error(
           "error" in payload
-            ? payload.error || "Unable to unlock the organizer list."
-            : "Unable to unlock the organizer list.",
+            ? payload.error || "Unable to unlock the planner list."
+            : "Unable to unlock the planner list.",
         );
       }
 
@@ -234,7 +236,7 @@ export function RsvpStation() {
       setOrganizerData(unlockedData);
       setOrganizerState({
         status: "unlocked",
-        message: "Organizer list unlocked.",
+        message: "Planner list unlocked.",
       });
     } catch (error) {
       setOrganizerData(null);
@@ -243,7 +245,7 @@ export function RsvpStation() {
         message:
           error instanceof Error
             ? error.message
-            : "Unable to unlock the organizer list.",
+            : "Unable to unlock the planner list.",
       });
     }
   }
@@ -452,7 +454,7 @@ export function RsvpStation() {
                 ))
               ) : (
                 <div className="rounded-[1.6rem] border border-white/14 bg-white/12 p-5 text-sm leading-7 text-cream-soft/82">
-                  The organizer list will appear here once RSVPs start arriving.
+                  The planner list will appear here once RSVPs start arriving.
                 </div>
               )}
             </div>
@@ -462,7 +464,7 @@ export function RsvpStation() {
             <div className="absolute inset-0 flex items-center justify-center bg-[rgba(73,33,23,0.36)] p-4 backdrop-blur-sm">
               <div className="w-full max-w-md rounded-[1.7rem] border border-white/14 bg-[rgba(255,250,243,0.14)] p-5 text-center shadow-[0_20px_45px_rgba(56,33,26,0.14)]">
                 <p className="section-eyebrow text-cream-soft/72">
-                  Organizer planner view
+                  Event planner view
                 </p>
                 <h3 className="mt-3 font-heading text-3xl text-cream-soft">
                   Hidden until unlocked
@@ -474,10 +476,10 @@ export function RsvpStation() {
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <input
                     type="password"
-                    value={adminPassword}
-                    onChange={(event) => setAdminPassword(event.target.value)}
+                    value={plannerPassword}
+                    onChange={(event) => setPlannerPassword(event.target.value)}
                     className="flex-1 rounded-full border border-white/18 bg-white/14 px-4 py-3 text-base text-cream-soft outline-none placeholder:text-cream-soft/44 focus:border-white/36"
-                    placeholder="Organizer password"
+                    placeholder="Event planner password"
                   />
                   <button
                     type="button"
@@ -520,7 +522,7 @@ export function RsvpStation() {
                 setOrganizerState({
                   status: "locked",
                   message:
-                    "Organizer access is hidden until the correct password is entered.",
+                    "Event planner access is hidden until the correct password is entered.",
                 });
               }}
               className="rounded-full border border-white/18 bg-transparent px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-cream-soft/84"
